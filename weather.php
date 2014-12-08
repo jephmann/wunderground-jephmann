@@ -119,7 +119,7 @@
      {
         echo "<div class=\"col-md-12\">"
             . "<h3>"
-            . "We await a 5-digit ZIP code (no more, no less). Thanks!"
+            . "We await a 5-digit US ZIP code (no more, no less). Please try again. Thanks!"
             . "</h3>"
             . "</div>";
      }
