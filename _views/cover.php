@@ -18,7 +18,7 @@
                         the front-end templates of Bootstrap with the API of WUnderGround.
                     </p>
                     <p class="lead">
-                        <a href="learn.php" class="btn btn-lg btn-default">Learn more</a>
+                        <a href="by_zip.php" class="btn btn-lg btn-default">Search by ZIP</a>
                     </p>
                 </div>
                 <div class="mastfoot">
