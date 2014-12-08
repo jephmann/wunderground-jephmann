@@ -1,7 +1,8 @@
 
 <?php
     /*
-     * Ideally I would break this entire file into separate files.
+     * Ideally I would break this entire file into separate files,
+     * one for the class and one for the file which loads it.
      */
 
      // API CLASS
@@ -64,17 +65,14 @@
         $response_termsofService    = htmlentities($response["termsofService"], ENT_QUOTES, 'UTF-8');
         $response_features          = $response["features"];
         $response_features_forecast = htmlentities($response_features["forecast"], ENT_QUOTES, 'UTF-8');
-        // Necessary or not, a simple way to test retrieval of data
-        echo "<p><a target=\"_blank\" href=\"{$response_termsofService}\">"
-            . "WEATHER UNDERGROUND API TERMS AND CONDITIONS OF USE"
-            . "</a><br />Version: {$response_version} | Forecast: {$response_features_forecast}</p>";
             
         /*
          * [FORECAST array]
          */        
         $forecast           = $data_zip["forecast"];
-        $forecast_text      = $forecast["txt_forecast"];
-        $forecast_simple    = $forecast["simpleforecast"];
+        $forecast_text      = $forecast["txt_forecast"];    // not using for this exercise
+        $forecast_simple    = $forecast["simpleforecast"];  // contains the 3-day forecast
+        
         foreach ($forecast_simple["forecastday"] as $forecastday)
         {
             $forecastday_date = $forecastday["date"]["weekday"] .', '. $forecastday["date"]["pretty"];
@@ -90,14 +88,18 @@
             
             if ($forecastday["date"]["day"] != date("d")) {
                 echo "<div class=\"col-md-4\">";
-                echo "<h2>{$forecastday_date}</h2>";
+                echo "<h3>{$forecastday_date}</h3>";
                 echo "<h2>{$forecastday_conditions}</h2>";
                 echo "<img src=\"{$forecastday_icon_url}\" alt=\"{$forecastday_icon}\" >";
                 echo "<h3>{$forecastday_F}</h3>";
                 echo "<h3>{$forecastday_C}</h3>";
                 echo "</div>";
             }
-        }
+        }        
+        // Necessary or not, a simple way to test retrieval of data
+        echo "<p><a target=\"_blank\" href=\"{$response_termsofService}\">"
+            . "WEATHER UNDERGROUND API TERMS AND CONDITIONS OF USE"
+            . "</a><br />Version: {$response_version} | Forecast: {$response_features_forecast}</p>";
         
         /*
          * What I normally would not do except for testing purposes:
@@ -115,5 +117,9 @@
      }
      else
      {
-         echo "<p>We await a 5-digit ZIP code (no more, no less). Thanks!</p>";
+        echo "<div class=\"col-md-12\">"
+            . "<h3>"
+            . "We await a 5-digit ZIP code (no more, no less). Thanks!"
+            . "</h3>"
+            . "</div>";
      }
