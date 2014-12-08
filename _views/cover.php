@@ -6,7 +6,7 @@
                         <h3 class="masthead-brand">WUnderGround-JePHmann</h3>
                         <ul class="nav masthead-nav">
                             <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">By Zip</a></li>
+                            <li><a href="by_zip.php">By Zip</a></li>
                         </ul>
                     </div>
                 </div>

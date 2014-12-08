@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>        
-        <!-- Read more at http://www.airpair.com/js/jquery-ajax-post-tutorial#qLHQ3UjfimxkoSSF.99 -->
-        <title>jQuery AJAX POST Form</title>
-        <meta charset="utf-8">      
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    </head>
-    <body>
+<?php
+    $page = array (
+        'path' => NULL,
+        'template' => 'jumbotron',
+    );
+    require_once ($page['path'] . '_inc/first.php');
+    
+    // HTML
+    require '_views/head.php';
+    require '_views/navigation.php';
+?>
+
+
+
         <h1>WUnderGround by ZIP</h1>
         <h3>Based on:
             <a target="_blank" href="http://www.wunderground.com/weather/api/d/docs?d=data/forecast&MR=1">
@@ -56,5 +61,7 @@
                 });
             });
         </script>
-    </body>
-</html>
+<?php
+    require '_views/footer.php';
+    require '_views/foot.php';
+?>
