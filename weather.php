@@ -50,9 +50,6 @@
      $zip = filter_input(INPUT_POST, 'zip', FILTER_SANITIZE_STRING);
      if (strlen($zip) === 5)
      {
-        echo "<pre>";
-        print_r($zip);
-        echo "</pre>";
         $obj_api = new Api;
         $url_zip = $obj_api->url_forecast_zip($zip);
         $data_zip = Api::retrieve($url_zip);
@@ -80,7 +77,9 @@
         $forecast_simple    = $forecast["simpleforecast"];
         foreach ($forecast_simple["forecastday"] as $forecastday)
         {
-            $forecastday_date = $forecastday["date"]["pretty"];
+            $forecastday_date = $forecastday["date"]["weekday"] .', '. $forecastday["date"]["pretty"];
+            $forecastday_icon_url = $forecastday["icon_url"];
+            $forecastday_icon = $forecastday["icon"];
             $forecastday_conditions = $forecastday["conditions"];
             $forecastday_high_F = $forecastday["high"]["fahrenheit"];
             $forecastday_low_F = $forecastday["low"]["fahrenheit"];
@@ -89,32 +88,29 @@
             $forecastday_F = "High {$forecastday_high_F} / Low {$forecastday_low_F} (F)";
             $forecastday_C = "High {$forecastday_high_C} / Low {$forecastday_low_C} (C)";
             
-            
-            echo "<h2>{$forecastday_date}</h2>";
-            echo "<h2>{$forecastday_conditions}</h2>";
-            echo "<h3>{$forecastday_F}</h3>";
-            echo "<h3>{$forecastday_C}</h3>";
+            if ($forecastday["date"]["day"] != date("d")) {
+                echo "<div class=\"col-md-4\">";
+                echo "<h2>{$forecastday_date}</h2>";
+                echo "<h2>{$forecastday_conditions}</h2>";
+                echo "<img src=\"{$forecastday_icon_url}\" alt=\"{$forecastday_icon}\" >";
+                echo "<h3>{$forecastday_F}</h3>";
+                echo "<h3>{$forecastday_C}</h3>";
+                echo "</div>";
+            }
         }
-        
-        
-        /*
-         * [ array]
-         */
-        
-        
-        
-        
         
         /*
          * What I normally would not do except for testing purposes:
          * Display raw data
          */
+        /*
         echo "<details>
             <summary>Raw Data (Forecast by ZIP)</summary>
             <pre>";
         print_r($data_zip);
         echo "</pre>                
-            </details>";
+            </details>";         * 
+         */
         
      }
      else
